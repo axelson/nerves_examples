@@ -6,14 +6,12 @@ defmodule Blinky do
   (see config.exs). See README.md for build instructions.
   """
 
-  # Durations are in milliseconds
-  @on_duration 200
-  @off_duration 200
-
   alias Nerves.Leds
   require Logger
 
   def start(_type, _args) do
+    Buzzy.start_link([])
+
     led_list = Application.get_env(:blinky, :led_list)
     Logger.debug("list of leds to blink is #{inspect(led_list)}")
     spawn(fn -> blink_list_forever(led_list) end)
@@ -28,10 +26,12 @@ defmodule Blinky do
 
   # given an led key, turn it on for @on_duration then back off
   defp blink(led_key) do
+    on_duration = Application.get_env(:blinky, :on_duration, 200)
+    off_duration = Application.get_env(:blinky, :off_duration, 200)
     # Logger.debug "blinking led #{inspect led_key}"
     Leds.set([{led_key, true}])
-    :timer.sleep(@on_duration)
+    :timer.sleep(on_duration)
     Leds.set([{led_key, false}])
-    :timer.sleep(@off_duration)
+    :timer.sleep(off_duration)
   end
 end
