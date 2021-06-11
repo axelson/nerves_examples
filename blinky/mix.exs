@@ -39,7 +39,10 @@ defmodule Blinky.MixProject do
   defp deps do
     [
       # Dependencies for all targets
-      {:nerves, "~> 1.6.0", runtime: false},
+      # Using nerves 1.6.3 causes the project to not be recompiled every time `mix compile` is run
+      # 1.6.4 causes it to be recompiled every time
+      {:nerves, "1.6.4", runtime: false},
+      {:elixir_make, "0.6.0"},
       {:shoehorn, "~> 0.6"},
       {:ring_logger, "~> 0.6"},
       {:toolshed, "~> 0.2"},
