@@ -41,8 +41,25 @@ defmodule Blinky.MixProject do
       # Dependencies for all targets
       # Using nerves 1.6.3 causes the project to not be recompiled every time `mix compile` is run
       # 1.6.4 causes it to be recompiled every time
-      {:nerves, "1.6.4", runtime: false},
-      {:elixir_make, "0.6.0"},
+      # {:nerves, "1.6.4", runtime: false},
+
+      # BROKEN (always recompiles, unless paired with elixir_make fix)
+      {:nerves, github: "nerves-project/nerves", runtime: false, tag: "40a77d8a9511fa9f14b0c5204ebda3c3ce0d3c76", override: true},
+
+      # WORKS (no extra recompiles)
+      # {:nerves, github: "nerves-project/nerves", runtime: false, tag: "ec5ae3f2639ededd229ee159d5ec9aa8e23b5470", override: true},
+
+      # BROKEN (always recompiles, even when using working tag from above)
+      # {:nerves, path: "~/dev/forks/nerves", runtime: false, override: true},
+
+      # {:elixir_make, "0.6.0"},
+
+      # WORKS (but is a workaround instead of a permanent fix)
+      {:elixir_make, github: "axelson/elixir_make", branch: "test-no-compile", override: true},
+
+      # Always recompiles
+      # {:elixir_make, path: "~/dev/forks/elixir_make", override: true},
+
       {:shoehorn, "~> 0.6"},
       {:ring_logger, "~> 0.6"},
       {:toolshed, "~> 0.2"},
