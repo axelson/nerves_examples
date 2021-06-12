@@ -55,7 +55,10 @@ defmodule Blinky.MixProject do
       # {:elixir_make, "0.6.0"},
 
       # WORKS (but is a workaround instead of a permanent fix)
-      {:elixir_make, github: "axelson/elixir_make", branch: "test-no-compile", override: true},
+      # {:elixir_make, github: "axelson/elixir_make", branch: "test-no-compile", override: true},
+
+      # WORKS (attempt at a working fix)
+      {:elixir_make, github: "axelson/elixir_make", branch: "detect-compile-needed", override: true},
 
       # Always recompiles
       # {:elixir_make, path: "~/dev/forks/elixir_make", override: true},
